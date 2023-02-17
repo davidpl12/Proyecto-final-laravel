@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('libros', function (Blueprint $table) {
+        Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('autor');
-            $table->string('categoria');
-            $table->year('resena');
-            $table->string('editorial');
-            $table->string('foto');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_libro');
+            $table->date('fecha');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_libro')->references('id')->on('libros');
+
 
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('libros');
+        Schema::dropIfExists('prestamos');
     }
 };
