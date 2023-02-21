@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('autor');
             $table->string('categoria');
-            $table->year('resena');
+            $table->string('resena');
             $table->string('editorial');
             $table->string('foto');
             $table->timestamps();
