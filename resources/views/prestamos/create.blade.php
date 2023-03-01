@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method="POST" action={{route('car.store') }} enctype="multipart/form-data">
+                    <form method="POST" action={{route('libros.store') }} enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
                             <label for="matricula" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matrícula</label>

@@ -11,14 +11,14 @@
                 <div class="p-6 text-gray-900">
 
                     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <img class="rounded-t-lg" src="{{asset($url.$mycar->foto)}}" alt="" />
+                            <img class="rounded-t-lg" src="{{asset($url.$mylibros->foto)}}" alt="" />
                         <div class="p-5">
 
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Matricula: {{$mycar->matricula}}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Año: {{$mycar->year}}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Color: {{$mycar->color}}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de la última revisión: {{$mycar->fecha_ultima_revision}}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Precio: {{$mycar->precio}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Matricula: {{$mylibros->matricula}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Año: {{$mylibros->year}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Color: {{$mylibros->color}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de la última revisión: {{$mylibros->fecha_ultima_revision}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Precio: {{$mylibros->precio}}</p>
 
                         </div>
                     </div>

@@ -7,9 +7,10 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 
-class CarController extends Controller
+class LibrosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +20,8 @@ class CarController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-        $mycars = $user->cars()->paginate(3);
-        return view('car.index')->with('mycars',$mycars);
+        $mylibross = $user->libross()->paginate(3);
+        return view('libros.index')->with('mylibross',$mylibross);
     }
 
     /**
@@ -30,7 +31,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('car.create');
+        return view('libros.create');
     }
 
     /**
@@ -42,29 +43,29 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'matricula'=>'required|unique:cars',
+            'matricula'=>'required|unique:libross',
             'marca'=>'required',
             'modelo'=>'required',
             'foto'=>'required|image'
         ]);
         try{
-            $mycar = new Libros();
-            $mycar->matricula = $request->matricula;
-            $mycar->marca = $request->marca;
-            $mycar->modelo = $request->modelo;
-            $mycar->year = $request->year;
-            $mycar->color = $request->color;
-            $mycar->fecha_ultima_revision = $request->fecha_ultima_revision;
-            $mycar->precio = $request->precio;
-            $mycar->user_id = Auth::id();
+            $mylibros = new Libros();
+            $mylibros->matricula = $request->matricula;
+            $mylibros->marca = $request->marca;
+            $mylibros->modelo = $request->modelo;
+            $mylibros->year = $request->year;
+            $mylibros->color = $request->color;
+            $mylibros->fecha_ultima_revision = $request->fecha_ultima_revision;
+            $mylibros->precio = $request->precio;
+            $mylibros->user_id = Auth::id();
             $nombrefoto = time() . "-" . $request->file('foto')->getClientOriginalName();
-            $mycar->foto = $nombrefoto;
-            $mycar->save();
-            $request->file('foto')->storeAs('public/img_cars', $nombrefoto);
-            return redirect()->route('car.index')->with('status', "Coche creado correctamente");
+            $mylibros->foto = $nombrefoto;
+            $mylibros->save();
+            $request->file('foto')->storeAs('public/img_libross', $nombrefoto);
+            return redirect()->route('libros.index')->with('status', "Coche creado correctamente");
         }
         catch(QueryException $exception){
-            return redirect()->route('car.index')->with('status', "No se ha podido crear el coche");
+            return redirect()->route('libros.index')->with('status', "No se ha podido crear el coche");
         }
     }
 
@@ -76,9 +77,9 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $mycar = Libros::findOrFail($id);
-        $url = 'storage/img_cars/';
-        return view('car.show')->with('mycar',$mycar)->with('url',$url);
+        $mylibros = Libros::findOrFail($id);
+        $url = 'storage/img_libross/';
+        return view('libros.show')->with('mylibros',$mylibros)->with('url',$url);
     }
 
     /**
@@ -90,9 +91,9 @@ class CarController extends Controller
     public function edit($id)
     {
 
-        $mycar = Libros::findOrFail($id);
-        $url = 'storage/img_cars/';
-        return view('car.edit')->with('mycar',$mycar)->with('url',$url);
+        $mylibros = Libros::findOrFail($id);
+        $url = 'storage/img_libross/';
+        return view('libros.edit')->with('mylibros',$mylibros)->with('url',$url);
     }
 
     /**
@@ -112,28 +113,28 @@ class CarController extends Controller
         ]);
 
         try{
-            $mycar = Libros::findOrFail($id);
-            $mycar->matricula = $request->matricula;
-            $mycar->marca = $request->marca;
-            $mycar->modelo = $request->modelo;
-            $mycar->year = $request->year;
-            $mycar->color = $request->color;
-            $mycar->fecha_ultima_revision = $request->fecha_ultima_revision;
-            $mycar->precio = $request->precio;
-            $mycar->user_id = Auth::id();
+            $mylibros = Libros::findOrFail($id);
+            $mylibros->matricula = $request->matricula;
+            $mylibros->marca = $request->marca;
+            $mylibros->modelo = $request->modelo;
+            $mylibros->year = $request->year;
+            $mylibros->color = $request->color;
+            $mylibros->fecha_ultima_revision = $request->fecha_ultima_revision;
+            $mylibros->precio = $request->precio;
+            $mylibros->user_id = Auth::id();
             if(is_uploaded_file($request->foto)){
                 $nombrefoto = time() . "-" . $request->file('foto')->getClientOriginalName();
-                $mycar->foto = $nombrefoto;
-                $request->file('foto')->storeAs('public/img_cars', $nombrefoto);
+                $mylibros->foto = $nombrefoto;
+                $request->file('foto')->storeAs('public/img_libross', $nombrefoto);
             }
 
 
-            $mycar->save();
+            $mylibros->save();
 
-            return redirect()->route('car.index')->with('status', "Coche editado correctamente");
+            return redirect()->route('libros.index')->with('status', "Coche editado correctamente");
         }
         catch(QueryException $exception){
-            return redirect()->route('car.index')->with('status', "No se ha podido crear el coche");
+            return redirect()->route('libros.index')->with('status', "No se ha podido crear el coche");
         }
     }
 
@@ -145,8 +146,8 @@ class CarController extends Controller
      */
     public function destroy($id)
     {
-        $mycar = Libros::findOrFail($id);
-        $mycar->delete();
-        return redirect()->route('car.index')->with('status', "Coche borrado correctamente");
+        $mylibros = Libros::findOrFail($id);
+        $mylibros->delete();
+        return redirect()->route('libros.index')->with('status', "Coche borrado correctamente");
     }
 }
